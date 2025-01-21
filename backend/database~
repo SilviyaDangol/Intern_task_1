@@ -1,0 +1,30 @@
+task name
+task_create_date
+task_state -> 1 -> in_complete, 2 -> completed
+task_id
+
+
+fetch('http://localhost:3000/get_task', {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json'
+    }
+}).then(
+    response => response.json()
+).then(
+    data => { console.log(data) }
+)
+}
+fetch('http://localhost:3000/set_task', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ task: task })
+}).then(
+    response => response.json()
+).then(
+    data => {
+        console.log(data)
+    })
+}

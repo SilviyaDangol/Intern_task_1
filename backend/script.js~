@@ -1,0 +1,53 @@
+
+function confirmDelete(taskId) {
+    // Perform the delete action here
+    fetch('http://localhost:3000/delete_task', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ taskId: taskId })
+    }).then(
+        response => response.json()
+    ).then(
+        data => {
+            console.log(data)
+            taskToDelete.remove();
+        }
+    )
+    deleteModal.close();
+}
+
+
+function addTask() {
+    const task = document.getElementById('taskInput').value;
+    if (task.trim() === '') {
+        showModal();
+    }else{
+        fetch('http://localhost:3000/set_task', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ task: task })
+        }).then(
+            response => response.json()
+        ).then(
+            data => {
+                console.log(data)
+            }
+        )
+    }
+}
+function loadTask() {
+    fetch('http://localhost:3000/get_task', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(
+        response => response.json()
+    ).then(
+        data => { console.log(data) }
+    )
+}
